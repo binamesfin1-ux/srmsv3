@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern Messenger Clone - Built with Vanilla JavaScript">
+    <meta name="theme-color" content="#0a7ea4">
+    
+    <title>Messenger Clone - Chat</title>
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="app-container" id="appContainer">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Header with logo and actions -->
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo">💬</div>
+                    <h1 class="app-title">Chats</h1>
+                </div>
+                <div class="sidebar-actions">
+                    <button class="icon-btn" id="newChatBtn" title="New chat">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </button>
+                    <button class="icon-btn" id="menuBtn" title="Menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="12" r="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search Messenger"
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">Inbox</button>
+                <button class="filter-tab" data-filter="unread">Unread</button>
+                <button class="filter-tab" data-filter="pinned">Pinned</button>
+                <button class="filter-tab" data-filter="favorites">Favorites</button>
+            </div>
+
+            <!-- Conversations List -->
+            <div class="conversations-container" id="conversationsContainer">
+                <div class="empty-state">
+                    <div class="empty-icon">💭</div>
+                    <p>No conversations yet</p>
+                    <p class="text-secondary">Start a new chat to begin messaging</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-content" id="mainContent">
+            <!-- Empty Chat State -->
+            <div class="empty-chat-state" id="emptyChatState">
+                <div class="empty-chat-content">
+                    <div class="empty-chat-icon">💬</div>
+                    <h2>Select a chat</h2>
+                    <p>Choose a conversation from the sidebar to start messaging</p>
+                </div>
+            </div>
+
+            <!-- Chat View (hidden by default) -->
+            <div class="chat-view" id="chatView" style="display: none;">
+                <!-- Chat Header -->
+                <header class="chat-header">
+                    <div class="chat-header-left">
+                        <button class="mobile-back-btn" id="mobileBackBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <div class="chat-info">
+                            <h3 id="chatName" class="chat-title">Chat Name</h3>
+                            <p id="chatStatus" class="chat-status">Active 2h ago</p>
+                        </div>
+                    </div>
+                    <div class="chat-header-actions">
+                        <button class="icon-btn" id="callBtn" title="Voice call">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn" id="videoBtn" title="Video call">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn" id="infoBtn" title="Info">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Messages Area -->
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Messages will be loaded here -->
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+
+                <!-- Message Input Area -->
+                <div class="message-input-area">
+                    <div class="input-actions">
+                        <button class="action-btn" id="attachBtn" title="Attach file">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 0 18.8-4.3M22 12.5a10 10 0 0 0-18.8 4.2"/>
+                            </svg>
+                        </button>
+                        <input type="file" id="fileInput" style="display: none;">
+                    </div>
+                    <div class="message-input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            class="message-input" 
+                            placeholder="Aa" 
+                            rows="1"
+                            autocomplete="off"
+                        ></textarea>
+                        <button class="emoji-btn" id="emojiBtn" title="Emoji picker">😊</button>
+                    </div>
+                    <button class="send-btn" id="sendBtn" title="Send message">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.9429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 C22.9702544,11.6889879 22.9702544,11.5318905 22.9702544,11.4748031 L4.13399899,2.57788954 C3.34915502,2.39334936 2.40734225,2.5504468 1.77946707,3.0266389 C0.994623095,3.50282262 0.837654326,4.49541699 1.15159189,5.28090381 L3.03521743,11.7219968 C3.03521743,11.8790942 3.19218622,12.0361917 3.50612381,12.0361917 L16.6915026,12.8216786 C16.6915026,12.8216786 17.1624089,12.8216786 17.1624089,12.3454864 C17.1624089,11.8132842 17.1624089,12.0361917 16.6915026,12.4744748 Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Emoji Picker Modal (hidden by default) -->
+        <div class="emoji-modal" id="emojiModal" style="display: none;">
+            <div class="emoji-picker">
+                <div class="emoji-header">
+                    <h4>Pick an emoji</h4>
+                    <button class="close-btn" id="closeEmojiBtn">✕</button>
+                </div>
+                <div class="emoji-categories">
+                    <button class="emoji-category active" data-category="smileys">😊</button>
+                    <button class="emoji-category" data-category="gestures">👋</button>
+                    <button class="emoji-category" data-category="objects">🎨</button>
+                    <button class="emoji-category" data-category="symbols">❤️</button>
+                </div>
+                <div class="emoji-grid" id="emojiGrid">
+                    <!-- Emojis will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Context Menu (hidden by default) -->
+        <div class="context-menu" id="contextMenu" style="display: none;">
+            <ul id="contextMenuItems"></ul>
+        </div>
+
+        <!-- Mobile Menu Drawer (hidden by default) -->
+        <div class="mobile-menu" id="mobileMenu" style="display: none;">
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+            <nav class="mobile-menu-content">
+                <div class="mobile-menu-header">
+                    <h2>Menu</h2>
+                    <button class="close-btn" id="closeMobileMenu">✕</button>
+                </div>
+                <ul class="mobile-menu-list">
+                    <li><a href="profile.html" class="menu-item">👤 Profile</a></li>
+                    <li><a href="settings.html" class="menu-item">⚙️ Settings</a></li>
+                    <li><a href="#" class="menu-item" id="darkModeToggle">🌙 Dark Mode</a></li>
+                    <li><a href="#" class="menu-item" id="logoutBtn">🚪 Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
