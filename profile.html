@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Profile - Messenger Clone">
+    <title>Profile - Messenger Clone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link">
+                        <div class="logo">💬</div>
+                        <h1 class="app-title">Messenger</h1>
+                    </a>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <span>Chats</span>
+                </a>
+                <a href="profile.html" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                    </svg>
+                    <span>Profile</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m3.08 3.08l4.24 4.24M1 12h6m6 0h6m-16.78 7.78l4.24-4.24m3.08-3.08l4.24-4.24"/>
+                    </svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content profile-page">
+            <!-- Cover Photo Section -->
+            <div class="profile-cover">
+                <img id="coverPhoto" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300'%3E%3Crect fill='%230a7ea4' width='1200' height='300'/%3E%3C/svg%3E" alt="Cover photo" class="cover-image">
+                <div class="cover-overlay">
+                    <button class="btn-icon-primary" id="changeCoverBtn" title="Change cover photo">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-avatar-section">
+                    <div class="profile-avatar-wrapper">
+                        <img id="profilePicture" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23e0e0e0' width='200' height='200'/%3E%3Ctext x='50%' y='50%' font-size='80' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3E%3F%3C/text%3E%3C/svg%3E" alt="Profile picture" class="profile-picture">
+                        <button class="btn-change-avatar" id="changeAvatarBtn" title="Change profile picture">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="profile-info">
+                        <h1 id="profileName" class="profile-name">User Name</h1>
+                        <p id="profileUsername" class="profile-username">@username</p>
+                        <p id="profileStatus" class="profile-status">Active 2 hours ago</p>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn-primary" id="editProfileBtn">Edit Profile</button>
+                    <button class="btn-secondary" id="shareProfileBtn">Share Profile</button>
+                </div>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- Stats Section -->
+                <section class="profile-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="messageCount">0</div>
+                        <div class="stat-label">Messages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="friendCount">0</div>
+                        <div class="stat-label">Friends</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="mediaCount">0</div>
+                        <div class="stat-label">Media</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="groupCount">0</div>
+                        <div class="stat-label">Groups</div>
+                    </div>
+                </section>
+
+                <!-- Bio Section -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>About</h2>
+                        <button class="btn-icon-secondary" id="editBioBtn">✎</button>
+                    </div>
+                    <p id="profileBio" class="profile-bio">No bio added yet</p>
+                </section>
+
+                <!-- Account Info Section -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>Account Information</h2>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Email</label>
+                            <p id="profileEmail" class="info-value">user@example.com</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Joined</label>
+                            <p id="profileJoined" class="info-value">2024</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Last Active</label>
+                            <p id="profileLastActive" class="info-value">2 hours ago</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Status</label>
+                            <p id="profileStatusText" class="info-value">Online</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Media Section -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>Shared Media</h2>
+                        <a href="#" class="link-secondary">View all</a>
+                    </div>
+                    <div class="media-grid" id="mediaGrid">
+                        <div class="media-placeholder">
+                            <p>No shared media yet</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="editProfileModal" style="display: none;">
+        <div class="modal-overlay" id="editProfileOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <button class="close-btn" id="closeEditModal">✕</button>
+            </div>
+            <form id="editProfileForm" class="modal-body">
+                <div class="form-group">
+                    <label for="editFullName">Full Name</label>
+                    <input type="text" id="editFullName" name="fullName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBio">Bio</label>
+                    <textarea id="editBio" name="bio" class="form-textarea" rows="4" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editStatus">Status</label>
+                    <select id="editStatus" name="status" class="form-input">
+                        <option value="online">Online</option>
+                        <option value="away">Away</option>
+                        <option value="busy">Busy</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" id="cancelEditBtn">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hidden File Input -->
+    <input type="file" id="fileInputAvatar" accept="image/*" style="display: none;">
+    <input type="file" id="fileInputCover" accept="image/*" style="display: none;">
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
